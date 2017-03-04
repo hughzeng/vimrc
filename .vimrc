@@ -1,30 +1,12 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
+set nocompatible " be iMproved, required
+set backspace=indent,eol,start
+filetype off   " required
 set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/YouCompleteMe
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
 Plugin 'Valloric/YouCompleteMe'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-
+call vundle#end()
+filetype plugin indent on " required
 "自动缩进与C语言风格缩进
 set autoindent 
 set cindent
@@ -50,7 +32,7 @@ set expandtab
 set mouse=a "开启鼠标点击
 set background=dark "背景使用黑色
 set t_Co=256 "开启256色
-set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
+"set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
 syntax on "语法高亮
 colorscheme molokai
 "搜索忽略大小写
@@ -82,26 +64,12 @@ function! ClosePair(char)
 endfunction
 filetype plugin indent on 
 
-"completion
-"打开文件类型检测, 加了这句才可以用智能补全
-set completeopt=longest,menu
-let g:clang_library_path='/usr/lib/llvm-3.8/lib'
-let g:ycm_key_list_select_completion=['<Down>']
-let g:ycm_key_list_previous_completion=['<Up>']
-let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
-let g:ycm_collect_identifiers_from_tags_files=1	"开启 YCM 基于标签引擎
-let g:ycm_min_num_of_chars_for_completion=1 "从第1个键入字符就开始罗列匹配项
-let g:ycm_cache_omnifunc=0 "禁止缓存匹配项,每次都重新生成匹配项
-let g:ycm_seed_identifiers_with_syntax=1 "语法关键字补全
-let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
-nnoremap <F5> :YcmForceCompileAndDiagnostics<CR> "force recomile with syntastic
-"nnoremap <leader>gc :YcmCompleter GoToDeclaration<CR>
-"nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
-"nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-let g:ycm_error_symbol = '>>'
-let g:ycm_warning_symbol = '>*'
+
+
 
 "CTags的设定  
+let Tlist_Show_One_File=1    
+" 只展示一个文件的taglist
 let Tlist_Sort_Type="name"    
 "按照名称排序  
 let Tlist_Use_Right_Window=1  
@@ -119,8 +87,6 @@ let Tlist_Show_One_File=1
 "不同时显示多个文件的tag，只显示当前文件的 
 let Tlist_Auto_Open=1 
 "打开代码时自动开启Tlist 
-autocmd FileType java set tags+=D:\tools\java\tags  
-autocmd FileType h,cpp,cc,c set tags+=D:\tools\cpp\tags  
 set tags=tags;  
 set autochdir 
 
@@ -140,4 +106,3 @@ let NERDTreeShowHidden=0 "显示隐藏文件
 let NERDTreeMinimalUI=1 "NERDTree子窗口中不显示冗余帮助信息
 let NERDTreeAutoDeleteBuffer=1 "删除文件时自动删除文件对应buffer
 autocmd BufRead *  25vsp  ./"自动开启NerdTree
-
