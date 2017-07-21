@@ -1,12 +1,16 @@
 set nocompatible " be iMproved, required
 set backspace=indent,eol,start
 filetype off   " required
+
 set rtp+=~/.vim/bundle/Vundle.vim
-set rtp+=~/.vim/bundle/YouCompleteMe
+
 call vundle#begin()
+
 Plugin 'Valloric/YouCompleteMe'
+
 call vundle#end()
 filetype plugin indent on " required
+
 "自动缩进与C语言风格缩进
 set autoindent 
 set cindent
@@ -34,7 +38,7 @@ set background=dark "背景使用黑色
 set t_Co=256 "开启256色
 "set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
 syntax on "语法高亮
-colorscheme molokai
+"colorscheme molokai
 "搜索忽略大小写
 set ignorecase
 "搜索逐字符高亮
@@ -64,8 +68,18 @@ function! ClosePair(char)
 endfunction
 filetype plugin indent on 
 
-
-
+#ycm
+let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_error_symbol = '!!'
+let g:ycm_warning_symbol = '>>'
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_collect_identifiers_from_tags_files=1 
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_python_binary_path = 'python3'
+nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nmap <F4> :YcmDiags<CR>
 
 "CTags的设定  
 let Tlist_Show_One_File=1    
@@ -105,4 +119,4 @@ let NERDTreeWinPos="left" "设置NERDTree子窗口位置
 let NERDTreeShowHidden=0 "显示隐藏文件
 let NERDTreeMinimalUI=1 "NERDTree子窗口中不显示冗余帮助信息
 let NERDTreeAutoDeleteBuffer=1 "删除文件时自动删除文件对应buffer
-autocmd BufRead *  25vsp  ./"自动开启NerdTree
+autocmd BufRead * 25vsp ./"自动开启NerdTree
