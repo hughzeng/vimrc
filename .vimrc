@@ -1,3 +1,4 @@
+$ cat .vimrc 
 set nocompatible " be iMproved, required
 set backspace=indent,eol,start
 filetype off   " required
@@ -5,10 +6,10 @@ filetype off   " required
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
-
-Plugin 'Valloric/YouCompleteMe'
-
+    Plugin 'Valloric/YouCompleteMe'
+    Plugin 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 call vundle#end()
+
 filetype plugin indent on " required
 
 "自动缩进与C语言风格缩进
@@ -20,24 +21,32 @@ set noexpandtab
 set smarttab
 "显示行号
 set number
-"调整窗口高度宽度的快捷键
-nmap w= :resize +3<CR>
-nmap w- :resize -3<CR>
-nmap w, :vertical resize -3<CR>
-nmap w. :vertical resize +3<CR>
-nmap sp :split<CR>
-nmap vs :vertical split<CR>
 "缩进宽度
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 "建议开启expandtab选项，会自动将tab扩展很空格，代码缩进会更美观
 set expandtab 
+
+"调整窗口高度宽度的快捷键
+nmap w= :resize +5<CR>
+nmap w- :resize -5<CR>
+nmap w, :vertical resize -5<CR>
+nmap w. :vertical resize +5<CR>
+nmap sp :split<CR>
+nmap vs :vertical split<CR>
 set mouse=a "开启鼠标点击
 set background=dark "背景使用黑色
-set t_Co=256 "开启256色
-"set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
+set showmatch
+set ruler
+"set t_Co=256 "开启256色
+"set termguicolors
+let g:solarized_termtrans = 1
+set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
 syntax on "语法高亮
+syntax enable 
+set background=dark 
+colorscheme solarized
 "colorscheme molokai
 "搜索忽略大小写
 set ignorecase
@@ -51,14 +60,14 @@ set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set langmenu=zh_CN.UTF-8
 set helplang=cn
 "自动补全
-:inoremap ( ()<ESC>i
-:inoremap ) <c-r>=ClosePair(')')<CR>
-:inoremap { {<CR>}<ESC>O
-:inoremap } <c-r>=ClosePair('}')<CR>
-:inoremap [ []<ESC>i
-:inoremap ] <c-r>=ClosePair(']')<CR>
-:inoremap " ""<ESC>i
-:inoremap ' ''<ESC>i
+":inoremap ( ()<ESC>i
+":inoremap ) <c-r>=ClosePair(')')<CR>
+":inoremap { {<CR>}<ESC>O
+":inoremap } <c-r>=ClosePair('}')<CR>
+":inoremap [ []<ESC>i
+":inoremap ] <c-r>=ClosePair(']')<CR>
+":inoremap " ""<ESC>i
+":inoremap ' ''<ESC>i
 function! ClosePair(char)
     if getline('.')[col('.') - 1] == a:char
         return "\<Right>"
@@ -68,7 +77,8 @@ function! ClosePair(char)
 endfunction
 filetype plugin indent on 
 
-#ycm
+
+"ycm
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_error_symbol = '!!'
 let g:ycm_warning_symbol = '>>'
@@ -119,4 +129,8 @@ let NERDTreeWinPos="left" "设置NERDTree子窗口位置
 let NERDTreeShowHidden=0 "显示隐藏文件
 let NERDTreeMinimalUI=1 "NERDTree子窗口中不显示冗余帮助信息
 let NERDTreeAutoDeleteBuffer=1 "删除文件时自动删除文件对应buffer
-autocmd BufRead * 25vsp ./"自动开启NerdTree
+"autocmd BufRead * 25vsp ./"自动开启NerdTree
+nmap <F2> :NERDTreeToggle<cr>
+nmap <F10> :set paste<cr>
+
+autocmd vimenter * NERDTree
